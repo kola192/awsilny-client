@@ -11,12 +11,14 @@ class Database {
 
   // order trip
   Future orderTrip(
+    customerID,
     startPlace,
     arrivePlace,
   ) async {
     print(startPlace);
     print(arrivePlace);
     orders.doc().set({
+      'customerID': customerID,
       'startPlace': startPlace,
       'arrivePlace': arrivePlace,
       'status': 'pending',
@@ -26,13 +28,12 @@ class Database {
   }
 
   // create a new driver in the database
-  void createNewDriver(id, name, email, phone, carType) async {
+  void createNewCustomer(id, name, email, phone) async {
     users.doc(id).set({
       'name': name,
       'email': email,
       'phone': phone,
-      'carType': carType,
-      'role': 'driver'
+      'role': 'customer'
     }).then((value) {
       // print(value);
       print('driver added');

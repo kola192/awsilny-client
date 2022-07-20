@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         ? const Loading()
         : Scaffold(
             appBar: AppBar(
-              title: const Text("لوحة التحكم"),
+              title: const Text("تطبيق أوصلني"),
               backgroundColor: AppColor.appBarColor,
               elevation: 0.0,
               actions: <Widget>[

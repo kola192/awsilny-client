@@ -33,7 +33,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
 
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  TextEditingController carTextEditingController = TextEditingController();
 
   String error = '';
 
@@ -129,18 +128,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      TextFormField(
-                        validator: ((value) {
-                          if (value == null || value.isEmpty) {
-                            return 'جميع الحقول مطلوبة';
-                          }
-                          return null;
-                        }),
-                        controller: carTextEditingController,
-                        decoration:
-                            inputDecoration.copyWith(labelText: 'نوع المركبة'),
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
                       const SizedBox(
                         height: 15.0,
                       ),
@@ -205,12 +192,12 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                               });
                             } else {
                               // create user collection in the database (all user data)
-                              _database.createNewDriver(
+                              _database.createNewCustomer(
                                 newUser.uid,
                                 nameTextEditingController.text,
                                 emailTextEditingController.text,
                                 phoneTextEditingController.text,
-                                carTextEditingController.text);
+                                );
                               print(newUser.uid);
                             }
                           }

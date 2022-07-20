@@ -2,11 +2,13 @@ import 'package:awsilny_client/services/auth.dart';
 import 'package:awsilny_client/services/database.dart';
 import 'package:awsilny_client/shared/colors.dart';
 import 'package:awsilny_client/utils/current_location_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 
 class NewTrip extends StatefulWidget {
   const NewTrip({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _NewTripState extends State<NewTrip> {
   }
 
   Widget build(BuildContext context) {
+    final user = Provider.of<User?>(context);
     var location = [];
     List<Placemark> startPlace;
     List<Placemark> arrivePlace;
@@ -50,11 +53,11 @@ class _NewTripState extends State<NewTrip> {
                         arrivePlace = await placemarkFromCoordinates(
                             latLong.latitude, latLong.longitude);
                         final snackbar = SnackBar(
-                          duration: const Duration(days: 10),
+                          duration: const Duration(seconds: 6),
                           action: SnackBarAction(
                               label: "تأكبد",
                               onPressed: () {
-                                database.orderTrip(startPlace.first.locality,
+                                database.orderTrip(user!.uid,startPlace.first.locality,
                                     arrivePlace.first.locality);
                                 Navigator.pop(context);
                               }),
